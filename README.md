@@ -22,7 +22,7 @@ it as much as I did.
 
 First of all clone the whole repository on your machine by running the following command
 ```sh
-git clone https://github.com/ismail17719/apigateway-based-microservices-in-laravel-and-lumen.git
+git clone https://github.com/yudhvir01/Microservices-project.git
 ```
 ### API Gateway
 To setup the gateway follow the steps below.
