@@ -18,16 +18,15 @@ Welcome to the ultimate backend blueprint where **Laravel meets Lumen**, and tog
 
 ```mermaid
 graph TD
-    FE[Front End<br/>Web / Mobile / 3P] --> AG[API Gateway]
-    DB[Database Layer] --> AG
+    FE[Front End<br/>Web / Mobile / 3rd Part Apps] --> AG[API Gateway]
     
-    AG --> API1[API 1: Posts Svc]
-    AG --> API2[API 2: Comments Svc]
-    AG --> AUTH[Auth & AuthZ Server]
+    AG --> API1[API 1: Posts Microservices]
+    AG --> API2[API 2: Comments Microservices]
+    AG --> AUTH[Autherization & Authentication Server]
     
-    API1 --> DB1[Posts DB]
-    API2 --> DB2[Comments DB]
-    AUTH --> DB3[User & OAuth DB]
+    API1 --> DB1[Posts Database]
+    API2 --> DB2[Comments Database]
+    AUTH --> DB3[User & OAuth Database]
     
     subgraph "Presentation Layer"
         FE
