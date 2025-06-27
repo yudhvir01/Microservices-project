@@ -16,33 +16,46 @@ Welcome to the ultimate backend blueprint where **Laravel meets Lumen**, and tog
 
 ### 🛠️ Architecture Diagram
 
-
-+---------------------+         +----------------------+         +--------------------------+
-|     Front End       |         |      API Layer       |         |       Database Layer     |
-| (Web / Mobile / 3P) |         |   (Stateless APIs)   |         |                          |
-+---------------------+         +----------------------+         +--------------------------+
-         |                                |                                |
-         |                                v                                |
-         |                     +--------------------+                     |
-         |                     |    API Gateway     |<--------------------+
-         |                     +--------------------+                     |
-         |                                |                                |
-         |       +------------------------+------------------------+      |
-         |       |                        |                        |      |
-         |       v                        v                        v      |
-         |  +------------+         +--------------+        +-------------------+
-         |  | API 1:     |         | API 2:       |        | Auth & AuthZ      |
-         |  | Posts Svc  |         | Comments Svc |        | Server            |
-         |  +------------+         +--------------+        +-------------------+
-         |       |                        |                        |
-         |       v                        v                        v
-         |  +------------+         +--------------+        +-------------------+
-         |  | Posts DB   |         | Comments DB  |        | User & OAuth DB   |
-         |  +------------+         +--------------+        +-------------------+
-
-
----
-
+```mermaid
+graph TD
+    FE[Front End<br/>Web / Mobile / 3P] --> AG[API Gateway]
+    DB[Database Layer] --> AG
+    
+    AG --> API1[API 1: Posts Svc]
+    AG --> API2[API 2: Comments Svc]
+    AG --> AUTH[Auth & AuthZ Server]
+    
+    API1 --> DB1[Posts DB]
+    API2 --> DB2[Comments DB]
+    AUTH --> DB3[User & OAuth DB]
+    
+    subgraph "Presentation Layer"
+        FE
+    end
+    
+    subgraph "Business Logic Layer"
+        AG
+        API1
+        API2
+        AUTH
+    end
+    
+    subgraph "Data Layer"
+        DB1
+        DB2
+        DB3
+    end
+    
+    classDef frontend fill:#3b82f6,stroke:#1e40af,color:#fff
+    classDef api fill:#06b6d4,stroke:#0891b2,color:#fff
+    classDef gateway fill:#6366f1,stroke:#4338ca,color:#fff
+    classDef database fill:#dc2626,stroke:#b91c1c,color:#fff
+    
+    class FE frontend
+    class AG gateway
+    class API1,API2,AUTH api
+    class DB1,DB2,DB3 database
+```
 ## 🎯 Why Microservices?
 
 Because scaling a monolith is like putting a jet engine on a bicycle. 🚲💥
